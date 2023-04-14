@@ -11,19 +11,11 @@ class VideoProcessor:
         img = frame.to_ndarray(format="bgr24")
         return av.VideoFrame.from_ndarray(img, format="bgr24")
  
-def video_frame_callback(frame):
-    img = frame.to_ndarray(format="bgr24")
-
-    flipped = img[::-1,:,:]
-
-    return av.VideoFrame.from_ndarray(flipped, format="bgr24")
-
 webrtc_ctx = webrtc_streamer(
     key="example", #WYH
     mode=WebRtcMode.SENDRECV,
     rtc_configuration=RTC_CONFIGURATION,
     media_stream_constraints={"video": True, "audio": False},
-    #video_processor_factory=VideoProcessor,
-    video_frame_callback=video_frame_callback,
+    video_processor_factory=VideoProcessor,
     async_processing=True,
 )
