@@ -1,1 +1,2 @@
 streamlit_webrtc
+aiortc==1.0.0
